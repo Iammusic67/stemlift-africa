@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StemLift Africa - Login</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>StemLift Africa</h1>
+    <p>Login to access teacher and student dashboards.</p>
+    <form id="login-form" class="card">
+      <label>
+        Username
+        <input type="text" id="username" required />
+      </label>
+      <label>
+        Password
+        <input type="password" id="password" required />
+      </label>
+      <button type="submit">Sign in</button>
+      <p class="hint">Use <strong>teacher/password123</strong> or <strong>student/student123</strong>.</p>
+      <div id="login-error" class="error"></div>
+    </form>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

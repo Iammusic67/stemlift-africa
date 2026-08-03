@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+  background: #eef2f6;
+  color: #1d2939;
+}
+
+.container {
+  max-width: 920px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #2563eb;
+  color: white;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+  margin-bottom: 1.5rem;
+  padding: 1.4rem;
+}
+
+h1, h2 {
+  margin: 0 0 0.75rem;
+}
+
+form label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='url'],
+textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.4rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  padding: 0.9rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #475569;
+}
+
+button:hover {
+  opacity: 0.95;
+}
+
+.error {
+  color: #b91c1c;
+  margin-top: 0.8rem;
+}
+
+.message {
+  margin-top: 0.8rem;
+  color: #0f172a;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+th {
+  background: #f8fafc;
+  text-align: left;
+}
+
+.hint {
+  font-size: 0.9rem;
+  color: #475569;
+}

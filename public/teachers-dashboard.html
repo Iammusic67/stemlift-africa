@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Teacher Dashboard</h1>
+      <button id="logout-button" class="secondary">Log out</button>
+    </header>
+    <div class="page-overlay">
+      <main class="container">
+        <div class="dashboard-hero">
+          <div class="hero-avatar" id="teacher-avatar">T</div>
+          <div class="hero-content">
+            <h2>Welcome, <span id="teacher-name"></span></h2>
+            <p>Generate quizzes, review student progress, and assign smart assessments to the students on your roster.</p>
+          </div>
+        </div>
+
+        <div class="action-grid" id="teacher-action-grid">
+          <a href="/teacher-editor.html" target="_blank" class="action-card" title="Open draft editor">
+            <div class="icon">📝</div>
+            <strong>Draft editor</strong>
+            <span>Open the worksheet-style editor to build quizzes.</span>
+          </a>
+          <button type="button" class="action-card" data-show-sections="student-management-card,student-performance-card">
+            <div class="icon">👥</div>
+            <strong>Student roster</strong>
+            <span>See students, progress, and performance details.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="add-teacher-card">
+            <div class="icon">👩‍🏫</div>
+            <strong>Add teacher</strong>
+            <span>Create another teacher account safely.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="ai-quiz-card">
+            <div class="icon">🤖</div>
+            <strong>Generate quiz</strong>
+            <span>Create an AI-powered assessment and assign it.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="assign-quiz-card">
+            <div class="icon">📌</div>
+            <strong>Assign quiz</strong>
+            <span>Pick a quiz and choose students to assign it to.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="create-quiz-card">
+            <div class="icon">🛠️</div>
+            <strong>Build quiz</strong>
+            <span>Create a task-ready assessment with questions and options.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="resource-card">
+            <div class="icon">📚</div>
+            <strong>Resources</strong>
+            <span>Upload or review learning materials.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="quiz-list-card">
+            <div class="icon">🗂️</div>
+            <strong>Quizzes</strong>
+            <span>Browse created quizzes and assignment counts.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="results-card">
+            <div class="icon">📊</div>
+            <strong>Results</strong>
+            <span>View quiz results by quiz ID.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="student-performance-card">
+            <div class="icon">🏆</div>
+            <strong>Performance summary</strong>
+            <span>See rank and average score for all students.</span>
+          </button>
+        </div>
+        <button type="button" id="show-actions-button" class="secondary hidden">Back to actions</button>
+
+        <div class="card-grid">
+          <section id="student-management-card" class="card teacher-action-card">
+            <h2>Add a student</h2>
+            <form id="student-form">
+              <label>Name<input type="text" name="name" required /></label>
+              <label>Username<input type="text" name="username" required /></label>
+              <label>Password<input type="password" name="password" required /></label>
+              <button type="submit">Create student</button>
+            </form>
+            <div id="student-message" class="message"></div>
+          </section>
+
+          <section id="add-teacher-card" class="card teacher-action-card">
+            <h2>Add another teacher</h2>
+            <form id="teacher-form">
+              <label>Name<input type="text" name="name" required /></label>
+              <label>Username<input type="text" name="username" required /></label>
+              <label>Password<input type="password" name="password" required /></label>
+              <button type="submit">Create teacher</button>
+            </form>
+            <div id="teacher-message" class="message"></div>
+          </section>
+
+          <section id="ai-quiz-card" class="card teacher-action-card">
+            <h2>Generate and assign quiz</h2>
+            <form id="ai-quiz-form">
+              <label>Subject<input type="text" name="subject" required /></label>
+              <label>Topic<input type="text" name="topic" required /></label>
+              <label>Quiz type<input type="text" name="type" placeholder="Assessment / Practice / Revision" /></label>
+              <label>Time limit (minutes)<input type="number" name="timeLimitMinutes" min="0" value="15" /></label>
+              <label class="checkbox-row"><input type="checkbox" name="assignToAll" value="1" /> Assign to all students</label>
+              <div class="student-selector" id="ai-quiz-student-list">
+                <p style="margin:0;font-size:0.95rem;opacity:0.85;">Select specific students to assign the quiz to.</p>
+                <div class="empty-state">Loading students…</div>
+              </div>
+              <button type="submit">Generate quiz</button>
+            </form>
+            <div id="ai-quiz-message" class="message"></div>
+          </section>
+
+          <section id="create-quiz-card" class="card teacher-action-card">
+            <h2>Build a quiz</h2>
+            <form id="create-quiz-form">
+              <label>Title<input type="text" name="title" required /></label>
+              <label>Description<textarea name="description" placeholder="Short description of the quiz"></textarea></label>
+              <label>Topic<input type="text" name="topic" placeholder="Math, Science, Technology" required /></label>
+              <label>Quiz type<input type="text" name="type" placeholder="Assessment / Practice / Revision" /></label>
+              <label>Time limit (minutes)<input type="number" name="timeLimitMinutes" min="0" value="15" /></label>
+              <div id="question-builder">
+                <div class="question-row">
+                  <label>Question<input type="text" name="question-0" required /></label>
+                  <label>Options<input type="text" name="options-0" placeholder="Separate options with |" required /></label>
+                  <label>Answer<input type="text" name="answer-0" required /></label>
+                </div>
+              </div>
+              <div class="button-row">
+                <button type="button" id="add-question-button" class="secondary">Add another question</button>
+                <button type="submit">Create quiz</button>
+              </div>
+            </form>
+            <div id="create-quiz-message" class="message"></div>
+          </section>
+
+          <section id="student-performance-card" class="card teacher-action-card">
+            <h2>Student performance list</h2>
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+              <button id="load-students" class="secondary">Refresh student list</button>
+              <button id="load-performance-summary" class="secondary">Load performance summary (ranks)</button>
+            </div>
+            <div id="student-list"></div>
+            <div id="student-performance"></div>
+          </section>
+
+          <section id="resource-card" class="card teacher-action-card">
+            <h2>Upload learning resource</h2>
+            <form id="resource-form">
+              <label>Title<input type="text" name="title" required /></label>
+              <label>URL<input type="url" name="url" required /></label>
+              <label>Description<textarea name="description"></textarea></label>
+              <button type="submit">Upload resource</button>
+            </form>
+            <div id="resource-message" class="message"></div>
+          </section>
+
+          <section id="assign-quiz-card" class="card teacher-action-card">
+            <h2>Assign a quiz</h2>
+            <form id="assign-quiz-form">
+              <label>Quiz ID<input type="text" name="quizId" required /></label>
+              <label class="checkbox-row"><input type="checkbox" name="assignToAll" /> Assign to all students</label>
+              <div class="student-selector" id="assign-quiz-student-list">
+                <p style="margin:0;font-size:0.95rem;opacity:0.85;">Select one or more students for this assignment.</p>
+                <div class="empty-state">Loading students…</div>
+              </div>
+              <button type="submit">Assign quiz</button>
+            </form>
+            <div id="assign-message" class="message"></div>
+          </section>
+
+          <section id="quiz-list-card" class="card teacher-action-card">
+            <h2>Available quizzes</h2>
+            <button id="load-quizzes" class="secondary">Refresh quizzes</button>
+            <div id="quiz-list"></div>
+          </section>
+
+          <section id="results-card" class="card teacher-action-card">
+            <h2>View quiz results</h2>
+            <form id="results-form">
+              <label>Quiz ID<input type="text" name="quizId" required /></label>
+              <button type="submit">Load results</button>
+            </form>
+            <div id="results-message" class="message"></div>
+            <div id="results-list"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="js/app.js"></script>
+  </body>
+</html>

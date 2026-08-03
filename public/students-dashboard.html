@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Student Dashboard</h1>
+      <button id="logout-button" class="secondary">Log out</button>
+    </header>
+    <div class="page-overlay">
+      <main class="container">
+        <div class="dashboard-hero">
+          <div class="hero-avatar" id="student-avatar">S</div>
+          <div class="hero-content">
+            <h2>Welcome, <span id="student-name"></span></h2>
+            <p>Track your quiz progress, access assigned assessments, and review personalized study tips.</p>
+          </div>
+        </div>
+
+        <div class="action-grid" id="student-action-grid">
+          <button type="button" class="action-card" data-show-sections="performance-card">
+            <div class="icon">📈</div>
+            <strong>Performance</strong>
+            <span>See your quiz results and averages.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="assigned-quizzes-card">
+            <div class="icon">📝</div>
+            <strong>Assigned quizzes</strong>
+            <span>Open and start your assigned quizzes.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="journey-card">
+            <div class="icon">🗺️</div>
+            <strong>Learning journey</strong>
+            <span>Track your missions, badges, and next steps.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="resources-card">
+            <div class="icon">📚</div>
+            <strong>Resources</strong>
+            <span>Open learning resources verified for you.</span>
+          </button>
+          <button type="button" class="action-card" data-show-sections="tips-card">
+            <div class="icon">💡</div>
+            <strong>Study tips</strong>
+            <span>Generate personalized study guidance.</span>
+          </button>
+        </div>
+        <button type="button" id="student-show-actions-button" class="secondary hidden">Back to actions</button>
+
+        <div class="card-grid">
+          <section id="performance-card" class="card student-action-card">
+            <h2>Performance overview</h2>
+            <button id="load-results" class="secondary">Refresh results</button>
+            <div id="performance-summary" class="performance-summary"></div>
+            <div id="performance-list"></div>
+          </section>
+
+          <section id="assigned-quizzes-card" class="card student-action-card">
+            <h2>Assigned quizzes</h2>
+            <div id="quiz-list"></div>
+            <div id="quiz-runner"></div>
+          </section>
+
+          <section id="journey-card" class="card student-action-card">
+            <h2>Learning journey</h2>
+            <div id="journey-summary"></div>
+            <div id="journey-list"></div>
+          </section>
+
+          <section id="resources-card" class="card student-action-card">
+            <h2>Verified resources</h2>
+            <button id="load-resources" class="secondary">Refresh resources</button>
+            <div id="resource-list"></div>
+          </section>
+
+          <section id="tips-card" class="card student-action-card">
+            <h2>Generate study tips</h2>
+            <form id="tips-form">
+              <label>Performance summary<textarea name="summary" placeholder="Describe your recent progress or struggles"></textarea></label>
+              <button type="submit">Generate tips</button>
+            </form>
+            <div id="tips-message" class="message"></div>
+            <div id="tips-list"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="js/app.js"></script>
+  </body>
+</html>
